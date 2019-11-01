@@ -155,7 +155,6 @@ function skylineHeights(arr){
         removeAt(arr,0)
     }
     removeDup(arr)
-    findMax(arr)
     filter(arr,arr[0]-1,findMax(arr)+1)
     return arr;
 }
