@@ -57,8 +57,8 @@ console.log("after swap", swapPairs(["Brendan", true, 42]))
 console.log("after swap", swapPairs(array))
 
 // Remove Duplicates
-var newArray = [5,5,5,5,4,4,4,4,3,3,3,7,7,7,7,8,8,8,2,2,2,6,6,6,1,1]
-console.log("array with duplicates", newArray)
+var array2 = [5,5,5,5,4,4,4,4,3,3,3,9,9,8,8,8,2,2,2,6,6,6,1,1,7,7,7,7]
+console.log("array with duplicates", array2)
 function removeDup(arr){
     for(var i = 1; i<arr.length; i++){
         if(arr[i]==arr[i-1]){
@@ -68,22 +68,96 @@ function removeDup(arr){
     }
     return arr;
 }
-console.log("duplicates removed:", removeDup(newArray))
+console.log("duplicates removed:", removeDup(array2))
 
 // Min to Front
 function minToFront(arr){
-    var minVal = arr[0]
     var minIdx = 0
     for (var i = 1; i<arr.length; i++){
-        if (minVal>arr[i]){
-            minVal = arr[i]
+        if (arr[minIdx]>arr[i]){
             minIdx = i
         }
     }
-    for (var j = minIdx; j>0; j--){
-        arr[j] = arr[j-1]
-    }
-    arr[0]= minVal
-    return arr
+    console.log(arr)
+    return pushFront(arr,removeAt(arr, minIdx))
 }
-console.log("min to front", minToFront(newArray))
+console.log("min to front", minToFront(array2))
+
+// Reverse
+function Reverse(arr){
+    for(var i = 0; i<=arr.length/2; i++){
+        var temp = arr[i];
+        arr[i] = arr[arr.length-1-i];
+        arr[arr.length-1-i] = temp;
+    }
+    return arr;
+}
+console.log("reversed", Reverse(array2))
+
+// Rotate
+function Rotate(arr, shiftBy){
+    if(shiftBy < 0){
+        shiftBy = arr.length + shiftBy;
+    }
+    console.log("array before rotate:", arr)
+    var count = 0
+    while( count < shiftBy){
+        pushFront(arr, removeAt(arr,arr.length-1))
+        count++
+    }
+    return arr;
+}
+console.log("rotated array: ", Rotate(array,-4))
+
+// Filter
+function filter(arr, min, max){
+    for(var i = 0; i<arr.length;i){
+        if(min>=arr[i] || max<=arr[i]){
+            removeAt(arr,i)
+        }
+        else{
+            i++
+        }
+    }
+    return arr;
+}
+console.log("filtered array:",filter(array2, 2,7)) // expected [6,3,4,5] 
+
+// Concat
+array3 = []
+function pushToNew(arr){
+    for(var i =0; i<arr.length; i++){
+        array3.push(arr[i])
+    }
+    return arr;
+}
+function arrConcat(arr1, arr2){
+    pushToNew(arr1);
+    pushToNew(arr2);    
+    return array3;
+}
+console.log("both arrays concat:", arrConcat(array, array2))
+
+// Skyline Heights
+function findMax(arr){
+    var max = arr[0]
+    for(var i = 0; i<arr.length;i++){
+        if(max<arr[i]){
+            max=arr[i]
+        }
+    }
+    return max;
+}
+var array4 = [-1,1,1,7,3]
+var array5 = [0,4]
+function skylineHeights(arr){
+    if(arr[0]<1){
+        removeAt(arr,0)
+    }
+    removeDup(arr)
+    findMax(arr)
+    filter(arr,arr[0]-1,findMax(arr)+1)
+    return arr;
+}
+console.log("skyline w/ array4:", skylineHeights(array4))
+console.log("skyline w/ array5:", skylineHeights(array5))
