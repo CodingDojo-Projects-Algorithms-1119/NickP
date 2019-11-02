@@ -1,3 +1,7 @@
+//---------------------------------------------------------------
+// ARRAYS
+//---------------------------------------------------------------
+
 var array = [1,2,3,4,5]
 
 // Push Front
@@ -29,8 +33,7 @@ function removeAt(arr,idx){
     for(var i = idx; i<arr.length; i++){
         arr[i] = arr[i+1]
     }
-    arr.pop()
-    // console.log("remove index", arr)
+    arr.length--;
     return removed;
 }
 console.log("remove", removeAt(array,3), array)
@@ -160,3 +163,66 @@ function skylineHeights(arr){
 }
 console.log("skyline w/ array4:", skylineHeights(array4))
 console.log("skyline w/ array5:", skylineHeights(array5))
+
+//---------------------------------------------------------------
+// STRINGS
+//---------------------------------------------------------------
+
+// Remove Blanks
+var withBlanks = " Pl ayTha tF u nkyM usi c "
+function removeBlanks(arr){
+    arr=arr.split(" ").join("")
+    return arr;
+}
+console.log("Blanks removed:", removeBlanks(withBlanks))
+
+// Get Digits
+var charAndInt = "0s1a3y5w7h9a2t4?6!8?0";
+function getDigits(arr){
+    arr=arr.split("")
+    for(var i = 0; i<arr.length;i++){
+        if(!Number(arr[i])){
+            arr[i]=""
+        }
+    }
+    arr=Number(arr.join(""))
+    return arr;
+}
+console.log("only digits:", getDigits(charAndInt))
+
+// Acronyms
+var line1="there's no free lunch - gotta pay yer way"
+var line2="Live from New York, it's Saturday Night!"
+function acronyms(arr){
+    arr= arr.split(" ")
+    var acronymed = []
+    for(var i =0; i<arr.length;i++){
+        acronymed.push(arr[i][0])
+    }
+    arr=acronymed.join("").toUpperCase()
+    return arr
+}
+console.log("acronymed:", acronyms(line1))
+console.log("acronymed:", acronyms(line2))
+
+// Count Non-Spaces
+var line3="Honey pie, you are driving me crazy"
+function countNonSpaces(arr){
+    return removeBlanks(arr).length
+}
+console.log("counting non-spaces:", countNonSpaces(line3))
+
+// Remove Shorter Strings
+var stringArray = ["this", "is", "a", "string", "array"]
+function removeShortStrings(arr,val){
+    for(var i =0; i<arr.length;i){
+        if(arr[i].length<val){
+            removeAt(arr,i)
+        }
+        else{
+            i++
+        }
+    }
+    return arr;
+}
+console.log("shorter strings removed:", removeShortStrings(stringArray,3))
