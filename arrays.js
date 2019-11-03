@@ -1,5 +1,5 @@
 //---------------------------------------------------------------
-// ARRAYS
+// ARRAYS - TO DO 1
 //---------------------------------------------------------------
 
 var array = [1,2,3,4,5]
@@ -73,6 +73,10 @@ function removeDup(arr){
 }
 console.log("duplicates removed:", removeDup(array2))
 
+//---------------------------------------------------------------
+// ARRAYS - TO DO 2
+//---------------------------------------------------------------
+
 // Min to Front
 function minToFront(arr){
     var minIdx = 0
@@ -112,14 +116,12 @@ function Rotate(arr, shiftBy){
 }
 console.log("rotated array: ", Rotate(array,-4))
 
-// Filter
+// Filter Range
 function filter(arr, min, max){
-    for(var i = 0; i<arr.length;i){
+    for(var i = 0; i<arr.length;i++){
         if(min>=arr[i] || max<=arr[i]){
             removeAt(arr,i)
-        }
-        else{
-            i++
+            i--
         }
     }
     return arr;
@@ -215,12 +217,10 @@ console.log("counting non-spaces:", countNonSpaces(line3))
 // Remove Shorter Strings
 var stringArray = ["this", "is", "a", "string", "array"]
 function removeShortStrings(arr,val){
-    for(var i =0; i<arr.length;i){
+    for(var i =0; i<arr.length;i++){
         if(arr[i].length<val){
             removeAt(arr,i)
-        }
-        else{
-            i++
+            i--
         }
     }
     return arr;
