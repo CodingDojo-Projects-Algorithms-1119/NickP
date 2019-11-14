@@ -55,10 +55,20 @@ class List {
         console.log("didn't find it:", value)
         return false;
     }
+    get length(){                   // placing "get"  makes it a propery, instead of a property
+        let nodeCount = 0;          // counter variable
+        let runner = this.head;     // set runner to start at first node, the head
+        while(runner){              // while runner exists and not null
+            nodeCount++;
+            runner = runner.next;
+        }
+        return nodeCount;
+    }
 }
 const list = new List();
 list.addFront(5).addFront(4).addFront(3).addFront(2).addFront(1)  // creates node with 5, then places 4 in front, etc
-console.log("list:", list)                                                               // 1 2 3 4 5
-console.log("removed front node:", list.removeFront())                                                   // 2 3 4 5
-console.log(list.front())                               // lists the value of first node(2)
-console.log(list.contains(4), list.contains(423))//, list.contains(5))        // true and false, respectively
+console.log("list:", list)                                        // 1 2 3 4 5
+console.log("removed front node:", list.removeFront())            // 2 3 4 5
+console.log(list.front())                                         // lists the value of first node(2)
+console.log(list.contains(4), list.contains(423))                 // true and false, respectively
+console.log("the length is ", list.length)                        // no () because we made it a property (like arrays). yield is still 4 
