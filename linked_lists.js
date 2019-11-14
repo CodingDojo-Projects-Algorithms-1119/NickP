@@ -54,22 +54,31 @@ class List {
         console.log("didn't find it:", value)
         return false;
     }
-    get length(){                   // placing "get"  makes it a propery, instead of a property
+    get length(){                   // placing "get"  makes it a propery, instead of a function
         let nodeCount = 0;          // counter variable
-        let runner = this.head;     // set runner to start at first node, the head
-        while(runner){              // while runner exists and not null
-            nodeCount++;
-            runner = runner.next;
-        }
+        this.traverse(function(){   // callback
+            nodeCount++;            // works because nodeCount is still kept in memory when func was created.
+        })
         return nodeCount;
     }
     print(){                        // function to print out all list values as string
-        let runner = this.head;
+        // let runner = this.head;
+        // while (runner){
+        //     console.log("Node has value of: ", runner.value);
+        //     runner = runner.next;
+        // }
+        // switching to callback to prevent repetition
+        this.traverse(function(node){
+            console.log("Node has value of: ", node.value)
+        });
+        return this;
+    }
+    traverse(callback){
+        let runner = this.head
         while (runner){
-            console.log("Node has value of: ", runner.value);
+            callback(runner)
             runner = runner.next;
         }
-        return this;
     }
 }
 const list = new List();
