@@ -118,4 +118,4 @@ console.log("the length is ", list.length)                        // no () becau
 list.print()                                                      // console logs every node value (2 3 4 5)
 console.log("max value: ", list.max())                            // max value (5)
 console.log("min value: ", list.min())                            // min value (2)
-console.log("Average value: ", list.average())
+console.log("Average value: ", list.average())                    // avg value ((2+3+4+5)/4) = 3.5
