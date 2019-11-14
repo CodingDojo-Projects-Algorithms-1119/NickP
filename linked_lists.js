@@ -55,6 +55,9 @@ class List {
         return false;
     }
     get length(){                   // placing "get"  makes it a propery, instead of a function
+        if(this.isEmpty()){
+            return false;
+        }                
         let nodeCount = 0;          // counter variable
         this.traverse(function(){   // callback
             nodeCount++;            // works because nodeCount is still kept in memory when func was created.
@@ -68,6 +71,9 @@ class List {
         //     runner = runner.next;
         // }
         // switching to callback to prevent repetition
+        if(this.isEmpty()){
+            return false;
+        }                
         this.traverse(function(node){
             console.log("Node has value of: ", node.value)
         });
@@ -81,6 +87,9 @@ class List {
         }
     }
     max(){
+        if(this.isEmpty()){
+            return false;
+        }                
         let max = this.head.value
         this.traverse(function(node){
             if (node.value > max){
@@ -90,6 +99,9 @@ class List {
         return max;
     }
     min(){
+        if(this.isEmpty()){
+            return false;
+        }                
         let min = this.head.value
         this.traverse(function(node){
             if(node.value < min){
@@ -99,13 +111,57 @@ class List {
         return min;
     }
     average(){
+        if(this.isEmpty()){
+            return false;
+        }                
         let sum = 0;
         this.traverse(function(node){
             sum += node.value
         })
         return sum/(list.length);
     }
-
+    lastNode(callback){
+        let backNode = 0;
+        this.traverse(function(node){
+            backNode = node;
+            callback(backNode);
+        })
+    }
+    back(){
+        if(this.isEmpty()){
+            return false;
+        }
+        let backVal = 0;
+        this.lastNode(function(node){
+            backVal = node.value;
+        })
+        return backVal;        
+    }
+    removeBack(){
+        if(this.isEmpty()){
+            return false;
+        }
+        let currentNode = this.head;
+        let newBack = 0;
+        while(currentNode.next != null){
+            newBack = currentNode;
+            console.log(currentNode);
+            currentNode = currentNode.next;
+        }
+        newBack.next = null
+        return this;
+    }
+    addBack(val){
+        if(this.isEmpty()){
+            this.addFront(val);
+        }
+        let lastNode = 0;
+        this.lastNode(function(node){
+            lastNode = node;
+        })
+        lastNode.next = new Node (val);
+        return this;
+    }
 }
 
 const list = new List();
@@ -119,3 +175,10 @@ list.print()                                                      // console log
 console.log("max value: ", list.max())                            // max value (5)
 console.log("min value: ", list.min())                            // min value (2)
 console.log("Average value: ", list.average())                    // avg value ((2+3+4+5)/4) = 3.5
+console.log("the back value: ", list.back())                      // val of last node, 5
+list.removeBack();                                                // removes the final node in list.
+console.log("after removeBack:");                                 // current list: 2,3,4
+list.print();                                                    
+console.log("adding a value to end:");
+console.log(list.addBack(30));                                    // current list: 2,3,4,30
+list.print();
