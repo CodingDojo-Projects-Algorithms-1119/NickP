@@ -24,8 +24,7 @@ class List {
         }
         return this;
     }
-    // Front - return value at front, not node
-    front(){
+    front(){                                // Front - return value at front, not node
         // if(this.head){
         //     return this.head.value
         // }
@@ -35,8 +34,8 @@ class List {
         // ternary operator expression ? if true :if false
         return this.head ? this.head.value : null;
     }
-    isEmpty(){  // check if is empty to prevent repetition
-        return this.head == null //? true : false;  <--- boolean is T/F anyways, so can skip that
+    isEmpty(){                          // check if is empty to prevent repetition
+        return this.head == null        //? true : false;  <--- boolean is T/F anyways, so can skip that
     }
     contains(value){
         if(this.isEmpty()){
@@ -64,6 +63,14 @@ class List {
         }
         return nodeCount;
     }
+    print(){                        // function to print out all list values as string
+        let runner = this.head;
+        while (runner){
+            console.log("Node has value of: ", runner.value);
+            runner = runner.next;
+        }
+        return this;
+    }
 }
 const list = new List();
 list.addFront(5).addFront(4).addFront(3).addFront(2).addFront(1)  // creates node with 5, then places 4 in front, etc
@@ -72,3 +79,4 @@ console.log("removed front node:", list.removeFront())            // 2 3 4 5
 console.log(list.front())                                         // lists the value of first node(2)
 console.log(list.contains(4), list.contains(423))                 // true and false, respectively
 console.log("the length is ", list.length)                        // no () because we made it a property (like arrays). yield is still 4 
+list.print()                                                      // console logs every node value (2 3 4 5)
