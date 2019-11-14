@@ -80,7 +80,34 @@ class List {
             runner = runner.next;
         }
     }
+    max(){
+        let max = this.head.value
+        this.traverse(function(node){
+            if (node.value > max){
+                max = node.value;
+            }
+        })
+        return max;
+    }
+    min(){
+        let min = this.head.value
+        this.traverse(function(node){
+            if(node.value < min){
+                min = node.value;
+            }
+        })
+        return min;
+    }
+    average(){
+        let sum = 0;
+        this.traverse(function(node){
+            sum += node.value
+        })
+        return sum/(list.length);
+    }
+
 }
+
 const list = new List();
 list.addFront(5).addFront(4).addFront(3).addFront(2).addFront(1)  // creates node with 5, then places 4 in front, etc
 console.log("list:", list)                                        // 1 2 3 4 5
@@ -89,3 +116,6 @@ console.log(list.front())                                         // lists the v
 console.log(list.contains(4), list.contains(423))                 // true and false, respectively
 console.log("the length is ", list.length)                        // no () because we made it a property (like arrays). yield is still 4 
 list.print()                                                      // console logs every node value (2 3 4 5)
+console.log("max value: ", list.max())                            // max value (5)
+console.log("min value: ", list.min())                            // min value (2)
+console.log("Average value: ", list.average())
